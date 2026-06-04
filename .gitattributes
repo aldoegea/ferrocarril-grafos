@@ -1,0 +1,3 @@
+# Forzar a GitHub a contar el archivo Markdown como código Python
+README.md linguist-language=R
+README.md linguist-detectable=true
