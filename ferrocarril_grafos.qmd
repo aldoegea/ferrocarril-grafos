@@ -24,6 +24,8 @@ Se quiere construir un ferrocarril metropolitano que conecte 8 barrios de la cap
 knitr::include_graphics("./recursos/tabla.png")
 ```
 
+## 1. Construcción y visualización del grafo
+
 Importamos la lista de nodos/pesos y lo convertimos en la matriz de adyacencia.
 
 ```{r}
@@ -92,19 +94,13 @@ plot(ig,
      margin=0)
 ```
 
-## 1. Construcción y visualización del grafo
-
-```{r, echo = FALSE, fig.cap = "", out.width = "100%", fig.align = "center"}
-knitr::include_graphics("./recursos/ej1-1.png")
-```
-
 ## 2. ¿Qué estaciones han de conectarse de forma que la duración del viaje entre el barrio A y cualquier otro barrio sea lo más corto posible?
 
 ### Paso inicial
 
 Comenzamos indicando la distancia desde el nodo A hasta todos los nodos del siguiente modo y marcando en rojo las etiquetas permanentes:
 
-<font style="color:red;">uA=0</font>      uB=3      uC=5      <font style="color:red;">uD=2</font>      uE=6      uF=3      uG=4      <font style="color:red;">uH=2</font>
+[uA=0      uB=3      uC=5      uD=2      uE=6      uF=3      uG=4      uH=2]{style="color:red;"}
 
 También es importante ir almacenando el predecesor de cada nodo:
 
@@ -116,19 +112,19 @@ También es importante ir almacenando el predecesor de cada nodo:
 
 Actualizamos distancias y predecesores del resto:
 
-- (u(B)=\min(u(B),u(D)+d(D,B),u(H)+d(H,B))=\min(3,2+4,2+2)=3), (p(B)=A)
-- (u(C)=\min(u(C),u(D)+d(D,C),u(H)+d(H,C))=\min(5,2+1,2+2)=3), (p(C)=D)
-- (u(E)=\min(u(E),u(D)+d(D,E),u(H)+d(H,E))=\min(6,2+4,2+1)=3), (p(E)=H)
-- (u(F)=\min(u(F),u(D)+d(D,F),u(H)+d(H,F))=\min(3,2+2,2+4)=3), (p(F)=A)
-- (u(G)=\min(u(G),u(D)+d(D,G),u(H)+d(H,G))=\min(4,2+1,2+3)=3), (p(G)=D)
+- uB= min { uB, uD + dDB, uH + dHB } = min { 3, 2+4, 2+2 } = 3     pB=A
+
+- uC= min { uC, uD + dDC, uH + dHC } = min { 5, 2+1, 2+2 } = 3     pC=D
+
+- uE = min { uE, uD + dDE, uH + dHE } = min { 6, 2+4, 2+1 } = 3     pE=H
+
+- uF = min { uF, uD + dDF, uH + dHF } = min { 3, 2+2, 2+4 } = 3     pF=A
+
+- uG = min { uG, uD + dDG, uH + dHG } = min { 4, 2+1, 2+3 } = 3     pG=D
 
 ### Solución
 
 **A-D, A-H, A-B, A-F, D-C, D-G, H-E**
-
-```{r, echo = FALSE, fig.cap = "", out.width = "100%", fig.align = "center"}
-knitr::include_graphics("./recursos/ej1-2.png")
-```
 
 ```{r}
 #| message: false
@@ -235,19 +231,6 @@ La suma total se corresponde con el coste mínimo para conectar todos los barrio
 
 [**1 + 1 + 1 + 2 + 2 + 2 + 2 = 11**]{style="color:red;"}
 
-```{r, echo = FALSE, fig.cap = "", out.width = "100%", fig.align = "center"}
-knitr::include_graphics("./recursos/ej1-3.png")
-```
-
-### Solución
-
-```{r, echo = FALSE, fig.cap = "", out.width = "100%", fig.align = "center"}
-knitr::include_graphics("./recursos/ej1-4.png")
-```
-
-```{r, echo = FALSE, fig.cap = "", out.width = "100%", fig.align = "center"}
-knitr::include_graphics("./recursos/ej1-5.png")
-```
 
 ```{r}
 #| message: false
